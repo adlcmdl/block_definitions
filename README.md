@@ -7,11 +7,8 @@ dictionary without having to leave Moodle.
 
 2021042900
 - Initial Release
-Last working on: Got the webservice call working through POSTMAN.
 
-Next job: Deal with no match.
-
-**Change Log**
+**TO DO**
 - Multiple dictionary support.
 - Full definiations (instead of abbreviated).
 - Pronunciation and sounds.
