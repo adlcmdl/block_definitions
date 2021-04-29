@@ -1,0 +1,19 @@
+.definition-tabs-container .functionallabel {
+    color: #4a7d95;
+    font-size: 70%;
+    font-weight: 700;
+}
+
+.definition-tabs-container li {
+    padding-bottom: 0.25em;
+}
+
+ul.definitions_close {
+  columns: 2;
+  -webkit-columns: 2;
+  -moz-columns: 2;
+}
+
+.definitions_footer {
+    border-top: 1px solid rgba(0,0,0,.125);
+}
