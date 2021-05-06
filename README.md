@@ -5,6 +5,9 @@ dictionary without having to leave Moodle.
 
 **Change Log**
 
+2021050600
+- Added support for a thesaurus
+
 2021042900
 - Initial Release
 
