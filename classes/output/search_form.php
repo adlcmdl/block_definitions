@@ -53,10 +53,18 @@ class search_form implements renderable, templatable {
     }
 
     public function export_for_template(renderer_base $output) {
+        global $SESSION;
+        
+        if (property_exists($SESSION, 'block_definition_dictionary')) {
+            $dictionary = $SESSION->block_definition_dictionary;
+        } else {
+            $dictionary = 'dictionary';
+        }
         $data = [
             'actionurl' => $this->actionurl->out(false),
             'mwlogo' => $output->image_url('mwlogo', 'block_definitions')->out(),
-            'selectdictionary' => 'dictionary'
+            'selectdictionary' => $dictionary === 'dictionary' ? true:false,
+            'selectthesaurus' =>  $dictionary === 'thesaurus' ? true:false,
         ];
         return $data;
     }

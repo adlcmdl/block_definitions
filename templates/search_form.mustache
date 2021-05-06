@@ -36,11 +36,11 @@
         <div class="input-group w-100 pt-2">
             <label class="sr-only" for="selectdictionary">{{#str}}selectdictionary, block_definitions{{/str}}</label>
             <div class="form-check form-check-inline">
-               <input class="form-check-input" type="radio" name="selectdictionary" id="selectDictionary1" value="dictionary" checked>
+               <input class="form-check-input" type="radio" name="selectdictionary" id="selectDictionary1" value="dictionary" {{#selectdictionary}}checked{{/selectdictionary}}>
                <label class="form-check-label" for "selectDictionary1">{{#str}}dictionary, block_definitions{{/str}}</label>
             </div> 
             <div class="form-check form-check-inline">
-               <input class="form-check-input" type="radio" name="selectdictionary" id="selectDictionary2" value="thesaurus">
+               <input class="form-check-input" type="radio" name="selectdictionary" id="selectDictionary2" value="thesaurus"  {{#selectthesaurus}}checked{{/selectthesaurus}}>
                <label class="form-check-label" for "selectDictionary2">{{#str}}thesaurus, block_definitions{{/str}}</label>
             </div>
         </div>

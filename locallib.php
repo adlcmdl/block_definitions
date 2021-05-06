@@ -35,10 +35,14 @@ defined('MOODLE_INTERNAL') || die;
  */
 
 function block_definitions_retrieve_definition($word, $dictionary, $format = 'normal') {
+    global $SESSION;
+    
     if ($dictionary == 'thesaurus') {
+        $SESSION->block_definition_dictionary = 'thesaurus';
         $dic = 'thesaurus';
         $api = get_config('block_definitions', 'api_thesaurus');
     } else {
+        $SESSION->block_definition_dictionary = 'dictionary';
         $dic = get_config('block_definitions', 'dictionary');
         $api = get_config('block_definitions', 'api_collegiate');
     }
