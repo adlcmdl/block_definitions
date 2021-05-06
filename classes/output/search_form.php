@@ -55,7 +55,8 @@ class search_form implements renderable, templatable {
     public function export_for_template(renderer_base $output) {
         $data = [
             'actionurl' => $this->actionurl->out(false),
-            'mwlogo' => $output->image_url('mwlogo', 'block_definitions')->out()
+            'mwlogo' => $output->image_url('mwlogo', 'block_definitions')->out(),
+            'selectdictionary' => 'dictionary'
         ];
         return $data;
     }

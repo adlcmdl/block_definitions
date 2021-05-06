@@ -36,3 +36,7 @@ $string['dictionary'] = 'Dictionary';
 $string['hideoffensive'] = 'Hide Offensive Words';
 $string['hideoffensivedesc'] = 'Hide words flagged as offensive.';
 $string['pluginname'] = 'Dictionary';
+$string['selectdictionary'] = 'Select Dictionary';
+$string['thesaurus'] = 'Thesaurus';
+$string['thesaurus_api'] = 'Thesaurus API';
+$string['thesaurus_api_desc'] = 'Enter the API key assigned to you for access to the Thesaurus';

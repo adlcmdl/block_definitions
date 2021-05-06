@@ -39,6 +39,11 @@ if ($ADMIN->fulltree) {
     $desc = get_string('collegiate_api_desc', 'block_definitions');
     $settings->add(new admin_setting_configtext('block_definitions/api_collegiate', $title, $desc, ''));
     
+    //The API Key for the thesaurus.
+    $title = get_string('thesaurus_api', 'block_definitions');
+    $desc = get_string('thesaurus_api_desc', 'block_definitions');
+    $settings->add(new admin_setting_configtext('block_definitions/api_thesaurus', $title, $desc, ''));
+    
     //Should we hide offensive words?
     $title = get_string('hideoffensive', 'block_definitions');
     $desc = get_string('hideoffensivedesc', 'block_definitions');

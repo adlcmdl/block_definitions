@@ -30,16 +30,25 @@ defined('MOODLE_INTERNAL') || die;
  * Retrieve a definition from the internet.
  * 
  * $word string The word or phrase to look up
+ * $dictionary string The dictionary to use
  * $format string The return format. Use "tabs" to return in tab format
  */
 
-function block_definitions_retrieve_definition($word, $format = 'normal') {
+function block_definitions_retrieve_definition($word, $dictionary, $format = 'normal') {
+    if ($dictionary == 'thesaurus') {
+        $dic = 'thesaurus';
+        $api = get_config('block_definitions', 'api_thesaurus');
+    } else {
+        $dic = get_config('block_definitions', 'dictionary');
+        $api = get_config('block_definitions', 'api_collegiate');
+    }
+
     $uri = 'https://dictionaryapi.com/api/v3/references/'
-            . urlencode(get_config('block_definitions', 'dictionary'))
+            . urlencode($dic)
             . '/json/'
             . $word
             . '?key='
-            . urlencode(get_config('block_definitions', 'api_collegiate'));
+            . urlencode($api);
 
     $definitions = json_decode(file_get_contents($uri));
 
@@ -53,12 +62,12 @@ function block_definitions_retrieve_definition($word, $format = 'normal') {
     $panels = array();    //For use when returnin in tabbed format.
     $closematches = array();
     $x = 0;
-    
+
     // Little bit of cleanup
     $word = strtolower($word);
     $word = trim($word);
     $exact = true;
-    
+
     if (gettype($definitions[0]) === "string") {
         //It's an array of close matches
         $closematch = true;
@@ -78,7 +87,7 @@ function block_definitions_retrieve_definition($word, $format = 'normal') {
              * If the first matching word isn't an exact match, then we probably don't have an exact match
              * so we're going to retrieve the closest match.
              */
-            
+
             if ($hideoffensive && $definition->meta->offensive) {
                 continue;
             }
@@ -114,22 +123,20 @@ function block_definitions_retrieve_definition($word, $format = 'normal') {
                 $panel->fl = $definition->fl;
                 $panel->hasins = false;
                 $panel->ins = '';
-                if (strtolower($w[0]) !== $word) {
+                if (property_exists($definition, 'vrs')) {
                     //Find what it's similar to
                     foreach ($definition->vrs as $vrs) {
-                        if (str_replace('*', '', $vrs->va) === $word) {
-                            $panel->hasins = true;
-                            $panel->ins = '<i>' . $vrs->vl . '</i> ' . str_replace('*', '', $vrs->va);
-                        }
+                        $panel->hasins = true;
+                        $panel->ins = '<i>' . $vrs->vl . '</i> ' . str_replace('*', '', $vrs->va);
                     }
                 }
                 $cxs = array();
                 if (property_exists($definition, 'cxs')) {
-                    foreach($definition->cxs as $c) {
+                    foreach ($definition->cxs as $c) {
                         $cx = new stdClass();
                         $cx->html = '<i>' . $c->cxl . '</i> ';
                         $a = 0;
-                        foreach($c->cxtis as $cxtis) {
+                        foreach ($c->cxtis as $cxtis) {
                             if ($a > 1) {
                                 $cx->html .= ', ';
                             }
@@ -139,19 +146,99 @@ function block_definitions_retrieve_definition($word, $format = 'normal') {
                         }
                         $cxs[] = $cx;
                     }
-                    $panel->hascxs =true;
+                    $panel->hascxs = true;
                 } else {
-                    $panel->hascxs =false;
+                    $panel->hascxs = false;
                 }
                 $panel->cxs = $cxs;
                 $def = array();
-                $i = 1;
-                foreach ($definition->shortdef as $d) {
-                    $a = new stdClass();
-                    $a->num = $i;
-                    $a->text = $d;
-                    $def[] = $a;
-                    $i++;
+                if ($dictionary === 'thesaurus') {
+                    $i = 1;
+                    foreach ($definition->def as $d) {
+                        foreach ($d->sseq as $sense) {
+                            $sense = $sense[0][1];
+                            $a = new stdClass();
+                            $a->num = $i;
+                            foreach ($sense->dt as $d) {
+                                if ($d[0] === 'text') {
+                                    $a->text = $d[1];
+                                }
+                            }
+
+                            if (property_exists($sense, 'syn_list')) {
+                                $syn_list = array();
+                                foreach ($sense->syn_list as $s) {
+                                    $sr = array();
+                                    foreach ($s as $syn) {
+                                        $sr[] = $syn->wd;
+                                    }
+                                    $syn_list[] = implode(', ', $sr);
+                                }
+                                $a->syn_heading = 'Synonyms for <em>' . $w[0] . '</em>';
+                                $a->syn_list = implode('<br>', $syn_list);
+                            }
+
+                            if (property_exists($sense, 'rel_list')) {
+                                $rel_list = array();
+                                foreach ($sense->rel_list as $s) {
+                                    $sr = array();
+                                    foreach ($s as $syn) {
+                                        $sr[] = $syn->wd;
+                                    }
+                                    $rel_list[] = implode(', ', $sr);
+                                }
+                                $a->rel_heading = 'Words related to <em>' . $w[0] . '</em>';
+                                $a->rel_list = '';
+                                foreach ($rel_list as $r) {
+                                    $a->rel_list .= '<p>' . $r . '</p>';
+                                }
+                            }
+
+                            if (property_exists($sense, 'near_list')) {
+                                $near_list = array();
+                                foreach ($sense->near_list as $s) {
+                                    $sr = array();
+                                    foreach ($s as $syn) {
+                                        $sr[] = $syn->wd;
+                                    }
+                                    $near_list[] = implode(', ', $sr);
+                                }
+                                $a->near_heading = 'Near Antonyms for <em>' . $w[0] . '</em>';
+                                $a->near_list = '';
+                                foreach ($near_list as $r) {
+                                    $a->near_list .= '<p>' . $r . '</p>';
+                                }
+                            }
+                            
+                            if (property_exists($sense, 'ant_list')) {
+                                $ant_list = array();
+                                foreach ($sense->ant_list as $s) {
+                                    $sr = array();
+                                    foreach ($s as $syn) {
+                                        $sr[] = $syn->wd;
+                                    }
+                                    $ant_list[] = implode(', ', $sr);
+                                }
+                                $a->ant_heading = 'Antonyms for <em>' . $w[0] . '</em>';
+                                $a->ant_list = '';
+                                foreach ($ant_list as $r) {
+                                    $a->ant_list .= '<p>' . $r . '</p>';
+                                }
+                            }
+                            
+                            $def[] = $a;
+                            $i++;
+                        }
+                    }
+                } else {
+                    $i = 1;
+                    foreach ($definition->shortdef as $d) {
+                        $a = new stdClass();
+                        $a->num = $i;
+                        $a->text = $d;
+                        $def[] = $a;
+                        $i++;
+                    }
                 }
                 $panel->def = $def;
 
@@ -162,6 +249,7 @@ function block_definitions_retrieve_definition($word, $format = 'normal') {
     }
     if ($format === 'tabs') {
         $ret = new stdClass();
+        $ret->template = $dictionary;
         if (count($tabs) > 1) {
             $ret->showtabs = true;
         } else {

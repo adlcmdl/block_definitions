@@ -40,7 +40,8 @@ class block_definitions_external extends external_api {
     public static function get_definition_parameters() {
         return new external_function_parameters(
                 array(
-            'word' => new external_value(PARAM_TEXT, 'the word to define')
+                    'word' => new external_value(PARAM_TEXT, 'the word to define'),
+                    'dictionary' => new external_value(PARAM_TEXT, '')
                 )
         );
     }
@@ -51,15 +52,16 @@ class block_definitions_external extends external_api {
      * @param string $word The word to define
      * @return array An array of definitions
      */
-    public static function get_definition($word) {
+    public static function get_definition($word, $dictionary) {
         $params = self::validate_parameters(
                         self::get_definition_parameters(),
                         array(
-                            'word' => $word
+                            'word' => $word,
+                            'dictionary' => $dictionary
                         )
         );
 
-        $ret = block_definitions_retrieve_definition($word, 'tabs');
+        $ret = block_definitions_retrieve_definition($word, $dictionary, 'tabs');
         $ret->containerid = uniqid();
         $ret->title = get_string('definitionfor', 'block_definitions') . $word;
         return $ret;
@@ -73,6 +75,7 @@ class block_definitions_external extends external_api {
     public static function get_definition_returns() {
         return new external_single_structure(
             array(
+                'template' => new external_value(PARAM_TEXT, 'The name of the template to render'),
                 'containerid' => new external_value(PARAM_TEXT, 'A unique ID for the tab container'),
                 'title' => new external_value(PARAM_TEXT, 'The title of the modal'),
                 'matchfound' => new external_value(PARAM_BOOL, 'Set to true if at least one definition was found'),
@@ -102,7 +105,15 @@ class block_definitions_external extends external_api {
                                     new external_single_structure(
                                             array(
                                                 'num' => new external_value(PARAM_INT, 'The definition numnber'),
-                                                'text' => new external_value(PARAM_TEXT, 'The definition text')
+                                                'text' => new external_value(PARAM_TEXT, 'The definition text'),
+                                                'syn_heading' => new external_value(PARAM_RAW, 'The heading for the synonym list', VALUE_OPTIONAL),
+                                                'syn_list' => new external_value(PARAM_RAW, 'A comma-separated list of synonyms', VALUE_OPTIONAL),
+                                                'rel_heading' => new external_value(PARAM_RAW, 'The heading for the related words list', VALUE_OPTIONAL),
+                                                'rel_list' => new external_value(PARAM_RAW, 'A comma-separated list of related words', VALUE_OPTIONAL),
+                                                'near_heading' => new external_value(PARAM_RAW, 'The heading for the near antonym words list', VALUE_OPTIONAL),
+                                                'near_list' => new external_value(PARAM_RAW, 'A comma-separated list of near antonym words', VALUE_OPTIONAL),
+                                                'ant_heading' => new external_value(PARAM_RAW, 'The heading for the antonym words list', VALUE_OPTIONAL),
+                                                'ant_list' => new external_value(PARAM_RAW, 'A comma-separated list of antonym words', VALUE_OPTIONAL)
                                                 )
                                         )
                                 ),

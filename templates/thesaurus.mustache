@@ -1,0 +1,120 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template block_definitions/thesaurus
+
+    This template renders a thesaurus entry
+
+    Example context (json):
+    [
+        {
+          "containerid": "60897345d8b40",
+          "title": "Definition for battle",
+          "tabs": [
+            { 
+                "selected": true,
+                "id": "tab_def_1",
+                "target": "panel_def_1",
+                "title": "battle (1)"
+            }
+          ],
+          "panels": [
+            {
+                "selected": true,
+                "id": "panel_def_1",
+                "def": [
+                    {
+                        "num": 1,
+                        "text": "a general encounter between armies, ships of war, or aircraft",
+                        "syn_list": "clash, combat, conflict, contest, dustup, fight, fracas, fray, hassle, scrap, scrimmage, scrum, scuffle, skirmish, struggle, tussle"
+                    }
+                ]
+            }
+          ]
+        }
+    ]
+}}
+
+{{#nomatch}}
+    <div>Sorry, the word you’re looking for can’t be found in the dictionary.</div>
+{{/nomatch}}
+
+{{#matchfound}}
+    <div class="definition-tabs-container">
+        {{#showtabs}}
+            <ul class="nav nav-tabs" id="{{{ containerid }}}" role="tablist">
+                {{#tabs}}
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link{{#selected}} active{{/selected}}" id="tab-{{ id}}" data-toggle="tab" href="#{{ target }}" role="tab" aria-controls="{{ target }}" aria-selected="{{#selected}}true{{/selected}}{{^selected}}false{{/selected}}">{{{ title }}}</a>
+                    </li>
+                {{/tabs}}
+            </ul>
+        {{/showtabs}}
+        <div class="{{#showtabs}}tab-content{{/showtabs}}">
+            {{#panels}}
+                <div class="tab-pane{{#selected}} active{{/selected}}" id="{{ id }}" role="tabpanel" aria-labelledby="tab-{-{{ id}}">
+                    <h1>{{ word}} <span class="functionallabel">{{ fl }}</span></h1>
+                    {{#hasins}}<h5>{{{ ins }}}</h5>{{/hasins}}
+                    {{#hascxs}}
+                        {{#cxs}}
+                            <h6 class="my-3">{{{ html }}}</h6>
+                        {{/cxs}}
+                    {{/hascxs}}
+                        <ol class="definitions_list_thesaurus">
+                            {{#def}}
+                                <li>
+                                    <p>{{{ text }}}</p>
+                                    <div class="definitions_related">
+                                        <h1>{{{syn_heading}}}</h1>
+                                        {{{syn_list}}}
+                                    </div>
+                                    {{#rel_list}}
+                                    <div class="definitions_related pt-3">
+                                        <h1>{{{rel_heading}}}</h1>
+                                        {{{rel_list}}}
+                                    </div>
+                                    {{/rel_list}}
+                                    {{#near_list}}
+                                    <div class="definitions_related pt-3">
+                                        <h1>{{{near_heading}}}</h1>
+                                        {{{near_list}}}
+                                    </div>
+                                    {{/near_list}}
+                                    {{#ant_list}}
+                                    <div class="definitions_related pt-3">
+                                        <h1>{{{ant_heading}}}</h1>
+                                        {{{ant_list}}}
+                                    </div>
+                                    {{/ant_list}}
+                                </li>
+                            {{/def}}
+                        </ol>
+                </div>
+            {{/panels}}
+        </div>
+    </div>
+{{/matchfound}}
+
+{{#closematch}}
+    The word you've entered isn't in the dictionary. Click on a suggestion below or try again.
+    
+    <ul class="definitions_close">
+        {{#closematches}}
+            <li><a href="#" data-define="{{{ word }}}">{{{ word }}}</a></li>
+        {{/closematches}}
+    </ul>
+{{/closematch}}

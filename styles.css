@@ -17,3 +17,17 @@ ul.definitions_close {
 .definitions_footer {
     border-top: 1px solid rgba(0,0,0,.125);
 }
+
+.definitions_related h1 {
+    color: #225f73;
+    font-size: 100%;
+    font-weight: 700;
+    padding-bottom: 0.25rem;
+}
+
+.definitions_related p {
+    margin-bottom: 0.25rem;
+}
+ol.definitions_list_thesaurus li {
+    padding-bottom: 0.5rem;
+}

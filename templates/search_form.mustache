@@ -27,10 +27,21 @@
 <div class="searchform">
     <form action="{{actionurl}}" class="form-inline">
         <div class="input-group w-100">
-            <label class="sr-only" for="searchform_search">{{#str}}search{{/str}}</label>
+            <label class="sr-only" for="definitions_search">{{#str}}search{{/str}}</label>
             <input id="definitions_search" name="definitions_search" type="text" class="form-control" size="10">
             <div class="input-group-append">
                 <button class="btn btn-secondary" id="searchform_button" type="submit">{{#str}}go{{/str}}</button>
+            </div>
+        </div>
+        <div class="input-group w-100 pt-2">
+            <label class="sr-only" for="selectdictionary">{{#str}}selectdictionary, block_definitions{{/str}}</label>
+            <div class="form-check form-check-inline">
+               <input class="form-check-input" type="radio" name="selectdictionary" id="selectDictionary1" value="dictionary" checked>
+               <label class="form-check-label" for "selectDictionary1">{{#str}}dictionary, block_definitions{{/str}}</label>
+            </div> 
+            <div class="form-check form-check-inline">
+               <input class="form-check-input" type="radio" name="selectdictionary" id="selectDictionary2" value="thesaurus">
+               <label class="form-check-label" for "selectDictionary2">{{#str}}thesaurus, block_definitions{{/str}}</label>
             </div>
         </div>
     </form>

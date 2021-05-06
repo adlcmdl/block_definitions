@@ -26,7 +26,8 @@
 define(['jquery', 'core/ajax', 'core/notification', 'core/templates', 'core/modal_factory'], function ($, Ajax, Notification, Templates, ModalFactory) {
 
     function _displayDefinition(response) {
-        Templates.render('block_definitions/definition', response).then(function (html, javascript) {
+        var template = 'block_definitions/' + response.template;
+        Templates.render(template, response).then(function (html, javascript) {
             ModalFactory.create({
                 title: 'Definition',
                 body: html,
@@ -38,22 +39,22 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/templates', 'core/moda
                     modal.hide();
                     modal.destroy();
                 });
-                
+
                 $('a[data-define]').on('click', function() {
                     modal.hide();
                     modal.destroy();
                     $('#definitions_search').val($(this).attr('data-define'));
-                    searchDefinition($(this).attr('data-define'));
+                    searchDefinition($(this).attr('data-define'), $('input[name="selectdictionary"]:checked').val());
                 });
             });
         }).fail(Notification.exception);
     }
 
-    function searchDefinition(def) {
+    function searchDefinition(def, dic) {
         var data;
         Ajax.call([{
                 methodname: 'block_definitions_get_definition',
-                args: {word: def},
+                args: {word: def, dictionary: dic},
                 done: function (data) {
                     _displayDefinition(data);
                 }.bind(data),
@@ -67,7 +68,8 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/templates', 'core/moda
             $(document).on('click', '#searchform_button', function (e) {
                 e.preventDefault();
                 var def = $('#definitions_search').val();
-                searchDefinition(def);
+                var dic = $('input[name="selectdictionary"]:checked').val();
+                searchDefinition(def, dic);
             });
         }
     };
