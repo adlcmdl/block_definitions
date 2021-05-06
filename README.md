@@ -5,6 +5,9 @@ dictionary without having to leave Moodle.
 
 **Change Log**
 
+2021050601
+- Store the dictionary used in the session variable to it sticks on subsequent pages.
+
 2021050600
 - Added support for a thesaurus
 
