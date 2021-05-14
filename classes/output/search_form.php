@@ -51,6 +51,12 @@ class search_form implements renderable, templatable {
         $this->actionurl = new moodle_url('');
     }
 
+    /**
+      * Export this data so it can be used as the context for a mustache template.
+      *
+      * @param \renderer_base $output
+      * @return \stdClass
+      */
     public function export_for_template(renderer_base $output) {
         global $SESSION;
 

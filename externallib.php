@@ -28,6 +28,11 @@ defined('MOODLE_INTERNAL') || die();
 require_once("$CFG->libdir/externallib.php");
 require_once("$CFG->dirroot/blocks/definitions/locallib.php");
 
+/**
+ * Definition block functions
+ * @copyright 2021 Pembina Hills School Division. All rights reserved.
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class block_definitions_external extends external_api {
 
     /**
@@ -49,6 +54,7 @@ class block_definitions_external extends external_api {
      * Get definition.
      *
      * @param string $word The word to define
+     * @param string $dictionary The dictionary to use
      * @return array An array of definitions
      */
     public static function get_definition($word, $dictionary) {

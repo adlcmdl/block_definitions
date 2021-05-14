@@ -25,14 +25,14 @@
  */
 defined('MOODLE_INTERNAL') || die;
 
-/*
+/**
  * Retrieve a definition from the internet.
  *
- * $word string The word or phrase to look up
- * $dictionary string The dictionary to use
- * $format string The return format. Use "tabs" to return in tab format
+ * @param string $word The word or phrase to look up
+ * @param string $dictionary The dictionary to use
+ * @param string $format The return format. Use "tabs" to return in tab format
+ * @return stdClass The data for use externally.
  */
-
 function block_definitions_retrieve_definition($word, $dictionary, $format = 'normal') {
     global $SESSION;
 

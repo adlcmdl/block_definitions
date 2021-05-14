@@ -26,12 +26,23 @@
 defined('MOODLE_INTERNAL') || die();
 require_once('locallib.php');
 
+/**
+ * Display the dictionary block
+ */
 class block_definitions extends block_base {
 
+    /**
+     * Initialise the block.
+     */
     public function init() {
         $this->title = get_string('pluginname', 'block_definitions');
     }
 
+    /**
+     * Return the content of this block.
+     *
+     * @return stdClass the content
+     */
     public function get_content() {
         if ($this->content !== null) {
             return $this->content;
