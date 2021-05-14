@@ -1,4 +1,5 @@
 <?php
+
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -44,6 +45,11 @@ function block_definitions_retrieve_definition($word, $dictionary, $format = 'no
         $SESSION->block_definition_dictionary = 'dictionary';
         $dic = get_config('block_definitions', 'dictionary');
         $api = get_config('block_definitions', 'api_collegiate');
+    }
+
+    if (strlen($api) == 0) {
+        // We don't have the api key. Bail gracefully.
+        return block_definitions_no_key();
     }
 
     $uri = 'https://dictionaryapi.com/api/v3/references/'
@@ -172,7 +178,7 @@ function block_definitions_retrieve_definition($word, $dictionary, $format = 'no
 
                             if (property_exists($sense, 'syn_list')) {
                                 $synlist = array();
-                                foreach ($sense->synlist as $s) {
+                                foreach ($sense->syn_list as $s) {
                                     $sr = array();
                                     foreach ($s as $syn) {
                                         $sr[] = $syn->wd;
@@ -255,6 +261,7 @@ function block_definitions_retrieve_definition($word, $dictionary, $format = 'no
     if ($format === 'tabs') {
         $ret = new stdClass();
         $ret->template = $dictionary;
+        $ret->title = get_string('definitionfor', 'block_definitions') . $word;
         if (count($tabs) > 1) {
             $ret->showtabs = true;
         } else {
@@ -271,6 +278,20 @@ function block_definitions_retrieve_definition($word, $dictionary, $format = 'no
             $ret->closematches = array();
         }
     }
+
+    return $ret;
+}
+
+/**
+ * Used to gracefully fail when there's no api key
+ * 
+ * @returns stdClass The data used externally.
+ */
+function block_definitions_no_key() {
+    $ret = new stdClass();
+    $ret->template = 'errormessage';
+    $ret->title = 'Not Configured Properly';
+    $ret->modalmessage = get_string('nokey', 'block_definitions');
 
     return $ret;
 }

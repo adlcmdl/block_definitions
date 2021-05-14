@@ -34,6 +34,7 @@ $string['definitions:myaddinstance'] = 'Add a new dictionary block to the My Moo
 $string['dictionary'] = 'Dictionary';
 $string['hideoffensive'] = 'Hide Offensive Words';
 $string['hideoffensivedesc'] = 'Hide words flagged as offensive.';
+$string['nokey'] = 'This block needs to be configured. Please talk to your Moodle administrator.';
 $string['pluginname'] = 'Dictionary';
 $string['privacy:metadata'] = 'The definitions block does not store any personal data.';
 $string['selectdictionary'] = 'Select Dictionary';

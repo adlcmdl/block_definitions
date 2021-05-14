@@ -68,7 +68,6 @@ class block_definitions_external extends external_api {
 
         $ret = block_definitions_retrieve_definition($word, $dictionary, 'tabs');
         $ret->containerid = uniqid();
-        $ret->title = get_string('definitionfor', 'block_definitions') . $word;
         return $ret;
     }
 
@@ -81,12 +80,12 @@ class block_definitions_external extends external_api {
         return new external_single_structure(
             array(
                 'template' => new external_value(PARAM_TEXT, 'The name of the template to render'),
-                'containerid' => new external_value(PARAM_TEXT, 'A unique ID for the tab container'),
+                'containerid' => new external_value(PARAM_TEXT, 'A unique ID for the tab container', VALUE_OPTIONAL),
                 'title' => new external_value(PARAM_TEXT, 'The title of the modal'),
-                'matchfound' => new external_value(PARAM_BOOL, 'Set to true if at least one definition was found'),
-                'nomatch' => new external_value(PARAM_BOOL, 'Set to true if not matches were found'),
-                'closematch' => new external_value(PARAM_BOOL, 'Set to true if no entry was found, but close matches were'),
-                'showtabs' => new external_value(PARAM_BOOL, 'Should the tabs be displayed'),
+                'matchfound' => new external_value(PARAM_BOOL, 'Set to true if at least one definition was found', VALUE_OPTIONAL),
+                'nomatch' => new external_value(PARAM_BOOL, 'Set to true if not matches were found', VALUE_OPTIONAL),
+                'closematch' => new external_value(PARAM_BOOL, 'Set to true if no entry was found, but close matches were', VALUE_OPTIONAL),
+                'showtabs' => new external_value(PARAM_BOOL, 'Should the tabs be displayed', VALUE_OPTIONAL),
                 'tabs' => new external_multiple_structure(
                     new external_single_structure(
                         array(
@@ -96,7 +95,7 @@ class block_definitions_external extends external_api {
                             'title' => new external_value(PARAM_TEXT, 'The title of this tab')
                         )
                     )
-                ),
+                , 'The tabs for each definition', VALUE_OPTIONAL),
                 'panels' => new external_multiple_structure(
                     new external_single_structure(
                         array(
@@ -139,15 +138,16 @@ class block_definitions_external extends external_api {
                                     )
                             )
                         )
-                    )
+                    ), 'The panels for each definition', VALUE_OPTIONAL
                 ),
                 'closematches' => new external_multiple_structure(
                         new external_single_structure(
                             array(
                                 'word' => new external_value(PARAM_TEXT, 'The word')
                             )
-                        )
-                )
+                        ), 'A list of close matches', VALUE_OPTIONAL
+                ),
+                'modalmessage' => new external_value(PARAM_RAW, 'The message to display in a modal if there is an error', VALUE_OPTIONAL),
             )
         );
     }
