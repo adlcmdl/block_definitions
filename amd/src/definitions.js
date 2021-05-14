@@ -23,7 +23,8 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-define(['jquery', 'core/ajax', 'core/notification', 'core/templates', 'core/modal_factory'], function ($, Ajax, Notification, Templates, ModalFactory) {
+define(['jquery', 'core/ajax', 'core/notification', 'core/templates',
+    'core/modal_factory'], function ($, Ajax, Notification, Templates, ModalFactory) {
 
     function _displayDefinition(response) {
         var template = 'block_definitions/' + response.template;
@@ -31,15 +32,10 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/templates', 'core/moda
             ModalFactory.create({
                 title: 'Definition',
                 body: html,
-                footer: '<button id="closeDialog" type="button" class="btn btn-primary" data-action="cancel">Close</button>'
+                footer: '<button id="closeDialog" type="button" class="btn btn-primary" data-action="hide">Close</button>'
             }).done(function (modal) {
                 modal.show();
                 Templates.runTemplateJS(javascript);
-                $('#closeDialog').on('click', function () {
-                    modal.hide();
-                    modal.destroy();
-                });
-
                 $('a[data-define]').on('click', function() {
                     modal.hide();
                     modal.destroy();

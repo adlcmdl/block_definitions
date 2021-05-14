@@ -67,7 +67,7 @@ class block_definitions_external extends external_api {
         );
 
         $ret = block_definitions_retrieve_definition($word, $dictionary, 'tabs');
-        $ret->containerid = uniqid();
+        $ret->containerid = "D" . uniqid();
         return $ret;
     }
 

@@ -58,14 +58,14 @@
             <ul class="nav nav-tabs" id="{{{ containerid }}}" role="tablist">
                 {{#tabs}}
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link{{#selected}} active{{/selected}}" id="tab-{{ id}}" data-toggle="tab" href="#{{ target }}" role="tab" aria-controls="{{ target }}" aria-selected="{{#selected}}true{{/selected}}{{^selected}}false{{/selected}}">{{{ title }}}</a>
+                        <a class="nav-link{{#selected}} active{{/selected}}" id="{{{ containerid }}}_{{ id}}" data-toggle="tab" href="#{{{ containerid }}}_{{ target }}" role="tab" aria-controls="{{{ containerid }}}_{{ target }}" aria-selected="{{#selected}}true{{/selected}}{{^selected}}false{{/selected}}">{{{ title }}}</a>
                     </li>
                 {{/tabs}}
             </ul>
         {{/showtabs}}
         <div class="{{#showtabs}}tab-content{{/showtabs}}">
             {{#panels}}
-                <div class="tab-pane{{#selected}} active{{/selected}}" id="{{ id }}" role="tabpanel" aria-labelledby="tab-{-{{ id}}">
+                <div class="tab-pane{{#selected}} active{{/selected}}" id="{{{ containerid }}}_{{ id }}" role="tabpanel" aria-labelledby="{{{ containerid }}}_{{ id}}">
                     <h1>{{ word}} <span class="functionallabel">{{ fl }}</span></h1>
                     {{#hasins}}<h5>{{{ ins }}}</h5>{{/hasins}}
                     {{#hascxs}}
