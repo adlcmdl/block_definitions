@@ -36,6 +36,7 @@ $string['dictionary'] = 'Dictionary';
 $string['hideoffensive'] = 'Hide Offensive Words';
 $string['hideoffensivedesc'] = 'Hide words flagged as offensive.';
 $string['pluginname'] = 'Dictionary';
+$string['privacy:metadata'] = 'The definitions block does not store any personal data.';
 $string['selectdictionary'] = 'Select Dictionary';
 $string['thesaurus'] = 'Thesaurus';
 $string['thesaurus_api'] = 'Thesaurus API';
