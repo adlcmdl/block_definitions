@@ -1,5 +1,4 @@
 <?php
-
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -44,7 +43,7 @@ class search_form implements renderable, templatable {
 
     /** @var moodle_url The form action URL. */
     protected $actionurl;
-    
+
     /**
      * Constructor.
      */
@@ -54,7 +53,7 @@ class search_form implements renderable, templatable {
 
     public function export_for_template(renderer_base $output) {
         global $SESSION;
-        
+
         if (property_exists($SESSION, 'block_definition_dictionary')) {
             $dictionary = $SESSION->block_definition_dictionary;
         } else {
@@ -63,9 +62,9 @@ class search_form implements renderable, templatable {
         $data = [
             'actionurl' => $this->actionurl->out(false),
             'mwlogo' => $output->image_url('mwlogo', 'block_definitions')->out(),
-            'selectdictionary' => $dictionary === 'dictionary' ? true:false,
-            'selectthesaurus' =>  $dictionary === 'thesaurus' ? true:false,
-        ];
+            'selectdictionary' => $dictionary === 'dictionary' ? true : false,
+            'selectthesaurus' => $dictionary === 'thesaurus' ? true : false
+            ];
         return $data;
     }
 

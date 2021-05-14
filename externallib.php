@@ -1,5 +1,4 @@
 <?php
-
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -94,7 +93,7 @@ class block_definitions_external extends external_api {
                 ),
                 'panels' => new external_multiple_structure(
                     new external_single_structure(
-                        array(        
+                        array(
                             'id' => new external_value(PARAM_TEXT, 'A unique ID for this panel'),
                             'word' => new external_value(PARAM_TEXT, 'The word'),
                             'selected' => new external_value(PARAM_BOOL, 'Is this panel selected?'),
@@ -106,14 +105,22 @@ class block_definitions_external extends external_api {
                                             array(
                                                 'num' => new external_value(PARAM_INT, 'The definition numnber'),
                                                 'text' => new external_value(PARAM_TEXT, 'The definition text'),
-                                                'syn_heading' => new external_value(PARAM_RAW, 'The heading for the synonym list', VALUE_OPTIONAL),
-                                                'syn_list' => new external_value(PARAM_RAW, 'A comma-separated list of synonyms', VALUE_OPTIONAL),
-                                                'rel_heading' => new external_value(PARAM_RAW, 'The heading for the related words list', VALUE_OPTIONAL),
-                                                'rel_list' => new external_value(PARAM_RAW, 'A comma-separated list of related words', VALUE_OPTIONAL),
-                                                'near_heading' => new external_value(PARAM_RAW, 'The heading for the near antonym words list', VALUE_OPTIONAL),
-                                                'near_list' => new external_value(PARAM_RAW, 'A comma-separated list of near antonym words', VALUE_OPTIONAL),
-                                                'ant_heading' => new external_value(PARAM_RAW, 'The heading for the antonym words list', VALUE_OPTIONAL),
-                                                'ant_list' => new external_value(PARAM_RAW, 'A comma-separated list of antonym words', VALUE_OPTIONAL)
+                                                'syn_heading' => new external_value(PARAM_RAW,
+                                                        'The heading for the synonym list', VALUE_OPTIONAL),
+                                                'syn_list' => new external_value(PARAM_RAW,
+                                                        'A comma-separated list of synonyms', VALUE_OPTIONAL),
+                                                'rel_heading' => new external_value(PARAM_RAW,
+                                                        'The heading for the related words list', VALUE_OPTIONAL),
+                                                'rel_list' => new external_value(PARAM_RAW,
+                                                        'A comma-separated list of related words', VALUE_OPTIONAL),
+                                                'near_heading' => new external_value(PARAM_RAW,
+                                                        'The heading for the near antonym words list', VALUE_OPTIONAL),
+                                                'near_list' => new external_value(PARAM_RAW,
+                                                        'A comma-separated list of near antonym words', VALUE_OPTIONAL),
+                                                'ant_heading' => new external_value(PARAM_RAW,
+                                                        'The heading for the antonym words list', VALUE_OPTIONAL),
+                                                'ant_list' => new external_value(PARAM_RAW,
+                                                        'A comma-separated list of antonym words', VALUE_OPTIONAL)
                                                 )
                                         )
                                 ),

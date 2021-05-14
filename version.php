@@ -1,5 +1,4 @@
 <?php
-
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -28,5 +27,5 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->version   = 2021050601;         // The current plugin version (Date: YYYYMMDDXX).
-$plugin->requires  = 2019111800;         // Requires this Moodle version. (3.8)
+$plugin->requires  = 2019111800;         // Requires this Moodle version. (3.8).
 $plugin->component = 'block_definitions'; // Full name of the plugin (used for diagnostics).

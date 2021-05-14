@@ -1,5 +1,4 @@
 <?php
-
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -28,7 +27,7 @@ defined('MOODLE_INTERNAL') || die;
 
 /*
  * Retrieve a definition from the internet.
- * 
+ *
  * $word string The word or phrase to look up
  * $dictionary string The dictionary to use
  * $format string The return format. Use "tabs" to return in tab format
@@ -36,7 +35,7 @@ defined('MOODLE_INTERNAL') || die;
 
 function block_definitions_retrieve_definition($word, $dictionary, $format = 'normal') {
     global $SESSION;
-    
+
     if ($dictionary == 'thesaurus') {
         $SESSION->block_definition_dictionary = 'thesaurus';
         $dic = 'thesaurus';
@@ -62,18 +61,20 @@ function block_definitions_retrieve_definition($word, $dictionary, $format = 'no
     $closematch = false;
     $hideoffensive = get_config('block_definitions', 'hideoffensive');
 
-    $tabs = array();    //For use when returnin in tabbed format.
-    $panels = array();    //For use when returnin in tabbed format.
+    // For use when returnin in tabbed format.
+    $tabs = array();
+    // For use when returnin in tabbed format.
+    $panels = array();
     $closematches = array();
     $x = 0;
 
-    // Little bit of cleanup
+    // Little bit of cleanup.
     $word = strtolower($word);
     $word = trim($word);
     $exact = true;
 
     if (gettype($definitions[0]) === "string") {
-        //It's an array of close matches
+        // It's an array of close matches.
         $closematch = true;
         $nomatch = false;
         $closematches = array();
@@ -87,7 +88,7 @@ function block_definitions_retrieve_definition($word, $dictionary, $format = 'no
             /*
              * For some reason the API likes to give similar words as well (eg. "battle" will also return "battle-ax")
              * Make sure the we're only retrieving the actual word we're looking up.
-             * 
+             *
              * If the first matching word isn't an exact match, then we probably don't have an exact match
              * so we're going to retrieve the closest match.
              */
@@ -101,7 +102,7 @@ function block_definitions_retrieve_definition($word, $dictionary, $format = 'no
             $w = explode(':', $definition->meta->id);
             if ((strtolower($w[0]) === $word || $exact === false) || ($x === 1 && strtolower($w[0]) !== $word)) {
                 if ($x === 1 && strtolower($w[0]) !== $word) {
-                    //We didn't get an exact match so let's return everything
+                    // We didn't get an exact match so let's return everything.
                     $exact = false;
                 }
                 $tab = new stdClass();
@@ -128,7 +129,7 @@ function block_definitions_retrieve_definition($word, $dictionary, $format = 'no
                 $panel->hasins = false;
                 $panel->ins = '';
                 if (property_exists($definition, 'vrs')) {
-                    //Find what it's similar to
+                    // Find what it's similar to.
                     foreach ($definition->vrs as $vrs) {
                         $panel->hasins = true;
                         $panel->ins = '<i>' . $vrs->vl . '</i> ' . str_replace('*', '', $vrs->va);
@@ -170,66 +171,66 @@ function block_definitions_retrieve_definition($word, $dictionary, $format = 'no
                             }
 
                             if (property_exists($sense, 'syn_list')) {
-                                $syn_list = array();
-                                foreach ($sense->syn_list as $s) {
+                                $synlist = array();
+                                foreach ($sense->synlist as $s) {
                                     $sr = array();
                                     foreach ($s as $syn) {
                                         $sr[] = $syn->wd;
                                     }
-                                    $syn_list[] = implode(', ', $sr);
+                                    $synlist[] = implode(', ', $sr);
                                 }
                                 $a->syn_heading = 'Synonyms for <em>' . $w[0] . '</em>';
-                                $a->syn_list = implode('<br>', $syn_list);
+                                $a->syn_list = implode('<br>', $synlist);
                             }
 
                             if (property_exists($sense, 'rel_list')) {
-                                $rel_list = array();
+                                $rellist = array();
                                 foreach ($sense->rel_list as $s) {
                                     $sr = array();
                                     foreach ($s as $syn) {
                                         $sr[] = $syn->wd;
                                     }
-                                    $rel_list[] = implode(', ', $sr);
+                                    $rellist[] = implode(', ', $sr);
                                 }
                                 $a->rel_heading = 'Words related to <em>' . $w[0] . '</em>';
                                 $a->rel_list = '';
-                                foreach ($rel_list as $r) {
+                                foreach ($rellist as $r) {
                                     $a->rel_list .= '<p>' . $r . '</p>';
                                 }
                             }
 
                             if (property_exists($sense, 'near_list')) {
-                                $near_list = array();
-                                foreach ($sense->near_list as $s) {
+                                $nearlist = array();
+                                foreach ($sense->nearlist as $s) {
                                     $sr = array();
                                     foreach ($s as $syn) {
                                         $sr[] = $syn->wd;
                                     }
-                                    $near_list[] = implode(', ', $sr);
+                                    $nearlist[] = implode(', ', $sr);
                                 }
                                 $a->near_heading = 'Near Antonyms for <em>' . $w[0] . '</em>';
                                 $a->near_list = '';
-                                foreach ($near_list as $r) {
+                                foreach ($nearlist as $r) {
                                     $a->near_list .= '<p>' . $r . '</p>';
                                 }
                             }
-                            
+
                             if (property_exists($sense, 'ant_list')) {
-                                $ant_list = array();
+                                $antlist = array();
                                 foreach ($sense->ant_list as $s) {
                                     $sr = array();
                                     foreach ($s as $syn) {
                                         $sr[] = $syn->wd;
                                     }
-                                    $ant_list[] = implode(', ', $sr);
+                                    $antlist[] = implode(', ', $sr);
                                 }
                                 $a->ant_heading = 'Antonyms for <em>' . $w[0] . '</em>';
                                 $a->ant_list = '';
-                                foreach ($ant_list as $r) {
+                                foreach ($antlist as $r) {
                                     $a->ant_list .= '<p>' . $r . '</p>';
                                 }
                             }
-                            
+
                             $def[] = $a;
                             $i++;
                         }

@@ -1,5 +1,4 @@
 <?php
-
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -51,8 +50,7 @@ class block_definitions extends block_base {
      *
      * By default this function simply permits the user to dock the block if it is dockable.
      */
-    function get_required_javascript() {
-        global $PAGE;
+    public function get_required_javascript() {
         parent::get_required_javascript();
 
         $this->page->requires->js_call_amd('block_definitions/definitions', 'init');

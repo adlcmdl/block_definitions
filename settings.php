@@ -1,5 +1,4 @@
 <?php
-
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -28,23 +27,23 @@ defined('MOODLE_INTERNAL') || die;
 
 if ($ADMIN->fulltree) {
     $dictionaries = array('collegiate' => 'Collegiate Dictionary');
-    
-    //The Dictionary to use
+
+    // The Dictionary to use.
     $title = get_string('config_dictionary', 'block_definitions');
     $desc = get_string('config_dictionary_desc', 'block_definitions');
     $settings->add(new admin_setting_configselect('block_definitions/dictionary', $title, $desc, 'collegiate', $dictionaries));
-    
-    //The API Key for the collegiate dictionary.
+
+    // The API Key for the collegiate dictionary.
     $title = get_string('collegiate_api', 'block_definitions');
     $desc = get_string('collegiate_api_desc', 'block_definitions');
     $settings->add(new admin_setting_configtext('block_definitions/api_collegiate', $title, $desc, ''));
-    
-    //The API Key for the thesaurus.
+
+    // The API Key for the thesaurus.
     $title = get_string('thesaurus_api', 'block_definitions');
     $desc = get_string('thesaurus_api_desc', 'block_definitions');
     $settings->add(new admin_setting_configtext('block_definitions/api_thesaurus', $title, $desc, ''));
-    
-    //Should we hide offensive words?
+
+    // Should we hide offensive words?
     $title = get_string('hideoffensive', 'block_definitions');
     $desc = get_string('hideoffensivedesc', 'block_definitions');
     $settings->add(new admin_setting_configcheckbox('block_definitions/hideoffensive', $title, $desc, '0'));
