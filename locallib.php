@@ -1,5 +1,4 @@
 <?php
-
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -284,8 +283,8 @@ function block_definitions_retrieve_definition($word, $dictionary, $format = 'no
 
 /**
  * Used to gracefully fail when there's no api key
- * 
- * @returns stdClass The data used externally.
+ *
+ * @return stdClass The data used externally.
  */
 function block_definitions_no_key() {
     $ret = new stdClass();

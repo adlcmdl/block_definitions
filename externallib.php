@@ -84,7 +84,8 @@ class block_definitions_external extends external_api {
                 'title' => new external_value(PARAM_TEXT, 'The title of the modal'),
                 'matchfound' => new external_value(PARAM_BOOL, 'Set to true if at least one definition was found', VALUE_OPTIONAL),
                 'nomatch' => new external_value(PARAM_BOOL, 'Set to true if not matches were found', VALUE_OPTIONAL),
-                'closematch' => new external_value(PARAM_BOOL, 'Set to true if no entry was found, but close matches were', VALUE_OPTIONAL),
+                'closematch' => new external_value(PARAM_BOOL,
+                        'Set to true if no entry was found, but close matches were', VALUE_OPTIONAL),
                 'showtabs' => new external_value(PARAM_BOOL, 'Should the tabs be displayed', VALUE_OPTIONAL),
                 'tabs' => new external_multiple_structure(
                     new external_single_structure(
@@ -147,7 +148,8 @@ class block_definitions_external extends external_api {
                             )
                         ), 'A list of close matches', VALUE_OPTIONAL
                 ),
-                'modalmessage' => new external_value(PARAM_RAW, 'The message to display in a modal if there is an error', VALUE_OPTIONAL),
+                'modalmessage' => new external_value(PARAM_RAW,
+                        'The message to display in a modal if there is an error', VALUE_OPTIONAL),
             )
         );
     }
