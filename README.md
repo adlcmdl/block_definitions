@@ -8,6 +8,13 @@ create an account. When creating the account, request API keys for the
 Collegiate dictionary and the thesaurus. (These are the only two supported
 dictionaries at this time).
 
+Currently the dictionary only returns the "shortdef" entries from the API.
+The description of the shortdef tag is here: https://dictionaryapi.com/products/json#sec-2.shortdef
+
+We strongly recommend after you install the plugin you compare the definitions
+from the plug to the definitions on the Merriam-Webster main site (https://www.merriam-webster.com/)
+to make sure it will meet your needs.
+
 **Change Log**
 
 2021052100
