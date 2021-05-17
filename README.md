@@ -22,10 +22,6 @@ dictionaries at this time).
 2021042900
 - Initial Release
 
-**TO DO**
-- Check styles.css to use the block classes.
-- Look for hard-coded strings, and replace them.
-
 - Multiple dictionary support.
 - Full definiations (instead of abbreviated).
 - Pronunciation and sounds.
