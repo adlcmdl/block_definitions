@@ -10,6 +10,9 @@ dictionaries at this time).
 
 **Change Log**
 
+2021052100
+- Some code cleanup. First public release
+
 2021050601
 - Store the dictionary used in the session variable to it sticks on subsequent pages.
 
