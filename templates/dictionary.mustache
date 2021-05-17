@@ -53,7 +53,7 @@
 {{/nomatch}}
 
 {{#matchfound}}
-    <div class="definition-tabs-container">
+    <div class="block_definitions-tabs-container">
         {{#showtabs}}
             <ul class="nav nav-tabs" id="{{{ containerid }}}" role="tablist">
                 {{#tabs}}
@@ -87,7 +87,7 @@
 {{#closematch}}
     The word you've entered isn't in the dictionary. Click on a suggestion below or try again.
     
-    <ul class="definitions_close">
+    <ul class="block_definitions_close">
         {{#closematches}}
             <li><a href="#" data-define="{{{ word }}}">{{{ word }}}</a></li>
         {{/closematches}}

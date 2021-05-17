@@ -54,7 +54,7 @@
 {{/nomatch}}
 
 {{#matchfound}}
-    <div class="definition-tabs-container">
+    <div class="block_definitions-tabs-container">
         {{#showtabs}}
             <ul class="nav nav-tabs" id="{{{ containerid }}}" role="tablist">
                 {{#tabs}}
@@ -78,24 +78,24 @@
                             {{#def}}
                                 <li>
                                     <p>{{{ text }}}</p>
-                                    <div class="definitions_related">
+                                    <div class="block_definitions_related">
                                         <h1>{{{syn_heading}}}</h1>
                                         {{{syn_list}}}
                                     </div>
                                     {{#rel_list}}
-                                    <div class="definitions_related pt-3">
+                                    <div class="block_definitions_related pt-3">
                                         <h1>{{{rel_heading}}}</h1>
                                         {{{rel_list}}}
                                     </div>
                                     {{/rel_list}}
                                     {{#near_list}}
-                                    <div class="definitions_related pt-3">
+                                    <div class="block_definitions_related pt-3">
                                         <h1>{{{near_heading}}}</h1>
                                         {{{near_list}}}
                                     </div>
                                     {{/near_list}}
                                     {{#ant_list}}
-                                    <div class="definitions_related pt-3">
+                                    <div class="block_definitions_related pt-3">
                                         <h1>{{{ant_heading}}}</h1>
                                         {{{ant_list}}}
                                     </div>
@@ -112,7 +112,7 @@
 {{#closematch}}
     The word you've entered isn't in the dictionary. Click on a suggestion below or try again.
     
-    <ul class="definitions_close">
+    <ul class="block_definitions_close">
         {{#closematches}}
             <li><a href="#" data-define="{{{ word }}}">{{{ word }}}</a></li>
         {{/closematches}}
