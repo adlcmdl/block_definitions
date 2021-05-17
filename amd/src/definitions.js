@@ -26,6 +26,11 @@
 define(['jquery', 'core/ajax', 'core/notification', 'core/templates',
     'core/modal_factory'], function ($, Ajax, Notification, Templates, ModalFactory) {
 
+    /**
+     * Take the response from the server and display it.
+     * @param object response The response from the Ajax request to the server.
+     * @returns void
+     */
     function _displayDefinition(response) {
         var template = 'block_definitions/' + response.template;
         Templates.render(template, response).then(function (html, javascript) {
@@ -36,7 +41,7 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/templates',
             }).done(function (modal) {
                 modal.show();
                 Templates.runTemplateJS(javascript);
-                $('a[data-define]').on('click', function() {
+                $('a[data-define]').on('click', function () {
                     modal.hide();
                     modal.destroy();
                     $('#definitions_search').val($(this).attr('data-define'));
@@ -46,6 +51,13 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/templates',
         }).fail(Notification.exception);
     }
 
+    /**
+     * Given a word and dictionary, search for the word using AJAX.
+     * 
+     * @param string def The word to search for.
+     * @param string dic The dictionary to use.
+     * @returns void
+     */
     function searchDefinition(def, dic) {
         var data;
         Ajax.call([{

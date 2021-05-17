@@ -9,13 +9,13 @@
 }
 
 ul.block_definitions_close {
-  columns: 2;
-  -webkit-columns: 2;
-  -moz-columns: 2;
+    columns: 2;
+    -webkit-columns: 2;
+    -moz-columns: 2;
 }
 
 .block_definitions_footer {
-    border-top: 1px solid rgba(0,0,0,.125);
+    border-top: 1px solid rgba(0, 0, 0, .125);
 }
 
 .block_definitions_related h1 {
