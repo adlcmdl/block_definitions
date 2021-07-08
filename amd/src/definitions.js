@@ -24,7 +24,7 @@
  */
 
 define(['jquery', 'core/ajax', 'core/notification', 'core/templates',
-    'core/modal_factory'], function ($, Ajax, Notification, Templates, ModalFactory) {
+    'core/modal_factory'], function($, Ajax, Notification, Templates, ModalFactory) {
 
     /**
      * Take the response from the server and display it.
@@ -33,15 +33,15 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/templates',
      */
     function _displayDefinition(response) {
         var template = 'block_definitions/' + response.template;
-        Templates.render(template, response).then(function (html, javascript) {
+        Templates.render(template, response).then(function(html, javascript) {
             ModalFactory.create({
                 title: 'Definition',
                 body: html,
                 footer: '<button id="closeDialog" type="button" class="btn btn-primary" data-action="hide">Close</button>'
-            }).done(function (modal) {
+            }).done(function(modal) {
                 modal.show();
                 Templates.runTemplateJS(javascript);
-                $('a[data-define]').on('click', function () {
+                $('a[data-define]').on('click', function() {
                     modal.hide();
                     modal.destroy();
                     $('#definitions_search').val($(this).attr('data-define'));
@@ -53,7 +53,7 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/templates',
 
     /**
      * Given a word and dictionary, search for the word using AJAX.
-     * 
+     *
      * @param string def The word to search for.
      * @param string dic The dictionary to use.
      * @returns void
@@ -63,7 +63,7 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/templates',
         Ajax.call([{
                 methodname: 'block_definitions_get_definition',
                 args: {word: def, dictionary: dic},
-                done: function (data) {
+                done: function(data) {
                     _displayDefinition(data);
                 }.bind(data),
 
@@ -72,8 +72,8 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/templates',
     }
 
     return {
-        init: function () {
-            $(document).on('click', '#searchform_button', function (e) {
+        init: function() {
+            $(document).on('click', '#searchform_button', function(e) {
                 e.preventDefault();
                 var def = $('#definitions_search').val();
                 var dic = $('input[name="selectdictionary"]:checked').val();
