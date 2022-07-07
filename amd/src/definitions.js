@@ -73,7 +73,7 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/templates',
 
     return {
         init: function() {
-            $(document).on('click', '#searchform_button', function(e) {
+            $(document).on('click', '#block_definition_searchform_button', function(e) {
                 e.preventDefault();
                 var def = $('#definitions_search').val();
                 var dic = $('input[name="selectdictionary"]:checked').val();
