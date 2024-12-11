@@ -17,7 +17,7 @@ to make sure it will meet your needs.
 
 **Change Log**
 
-*current version*
+2024121100
 - Fix an error when near antonyms aren't included.
 
 2021072101
