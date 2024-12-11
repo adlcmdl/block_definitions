@@ -1,4 +1,5 @@
 <?php
+
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -206,12 +207,14 @@ function block_definitions_retrieve_definition($word, $dictionary, $format = 'no
 
                             if (property_exists($sense, 'near_list')) {
                                 $nearlist = array();
-                                foreach ($sense->nearlist as $s) {
-                                    $sr = array();
-                                    foreach ($s as $syn) {
-                                        $sr[] = $syn->wd;
+                                if (isset($sense->nearlist)) {
+                                    foreach ($sense->nearlist as $s) {
+                                        $sr = array();
+                                        foreach ($s as $syn) {
+                                            $sr[] = $syn->wd;
+                                        }
+                                        $nearlist[] = implode(', ', $sr);
                                     }
-                                    $nearlist[] = implode(', ', $sr);
                                 }
                                 $a->near_heading = 'Near Antonyms for <em>' . $w[0] . '</em>';
                                 $a->near_list = '';

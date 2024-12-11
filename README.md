@@ -17,6 +17,9 @@ to make sure it will meet your needs.
 
 **Change Log**
 
+*current version*
+- Fix an error when near antonyms aren't included.
+
 2021072101
 - More code tweaks.
 
