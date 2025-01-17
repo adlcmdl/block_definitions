@@ -14,7 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-
 /**
  * External functions and service definitions
  *
@@ -26,25 +25,25 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$functions = array(
-    'block_definitions_get_definition' => array(
+$functions = [
+    'block_definitions_get_definition' => [
         'classname' => 'block_definitions_external',
         'methodname' => 'get_definition',
         'classpath' => 'blocks/definitions/externallib.php',
         'description' => 'Get a definition',
         'ajax' => true,
         'type' => 'read'
-    )
-);
+    ],
+];
 
 // We define the services to install as pre-build services. A pre-build service is not editable by administrator.
-$services = array(
-    'Defintions' => array(
+$services = [
+    'Defintions' => [
         'shortname' => 'block_definitions',
-        'functions' => array(
-            'block_definitions_get_definition'
-        ),
+        'functions' => [
+            'block_definitions_get_definition',
+        ],
         'restrictedusers' => 0,
         'enabled' => 1,
-    )
-);
+    ],
+];

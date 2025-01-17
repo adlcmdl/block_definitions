@@ -14,7 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-
 /**
  * Search form renderable.
  *
@@ -25,7 +24,6 @@
  */
 
 namespace block_definitions\output;
-defined('MOODLE_INTERNAL') || die();
 
 use moodle_url;
 use renderable;
@@ -69,7 +67,7 @@ class search_form implements renderable, templatable {
             'actionurl' => $this->actionurl->out(false),
             'mwlogo' => $output->image_url('mwlogo', 'block_definitions')->out(),
             'selectdictionary' => $dictionary === 'dictionary' ? true : false,
-            'selectthesaurus' => $dictionary === 'thesaurus' ? true : false
+            'selectthesaurus' => $dictionary === 'thesaurus' ? true : false,
             ];
         return $data;
     }

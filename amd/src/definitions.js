@@ -13,13 +13,12 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-
 /**
  * Client-side script to look up words and present them in a dialog.
  *
- * @package   block_definitions
- * @author    Tim Martinez <tim.martinez@adlc.ca>
- * @copyright 2021 Pembina Hills School Division. All rights reserved.
+ * @module    block_definitions/definitions
+ * @author    Tim Martinez <tim.martinez@pembinahills.ca>
+ * @copyright 2025 Pembina Hills School Division. All rights reserved.
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -28,7 +27,7 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/templates',
 
     /**
      * Take the response from the server and display it.
-     * @param object response The response from the Ajax request to the server.
+     * @param {object} response The response from the Ajax request to the server.
      * @returns void
      */
     function _displayDefinition(response) {
@@ -54,8 +53,8 @@ define(['jquery', 'core/ajax', 'core/notification', 'core/templates',
     /**
      * Given a word and dictionary, search for the word using AJAX.
      *
-     * @param string def The word to search for.
-     * @param string dic The dictionary to use.
+     * @param {String} def The word to search for.
+     * @param {String} dic The dictionary to use.
      * @returns void
      */
     function searchDefinition(def, dic) {

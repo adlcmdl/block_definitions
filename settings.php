@@ -14,7 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-
 /**
  * Global settings for the definitions block.
  *
@@ -26,7 +25,7 @@
 defined('MOODLE_INTERNAL') || die;
 
 if ($ADMIN->fulltree) {
-    $dictionaries = array('collegiate' => 'Collegiate Dictionary');
+    $dictionaries = ['collegiate' => 'Collegiate Dictionary'];
 
     // The Dictionary to use.
     $title = get_string('config_dictionary', 'block_definitions');

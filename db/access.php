@@ -14,7 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-
 /**
  * Capabilities for the definition block.
  *
@@ -26,23 +25,23 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$capabilities = array(
+$capabilities = [
 
-    'block/definitions:myaddinstance' => array(
+    'block/definitions:myaddinstance' => [
         'captype' => 'write',
         'contextlevel' => CONTEXT_SYSTEM,
-        'archetypes' => array(
-        )
-    ),
+        'archetypes' => [
+        ],
+    ],
 
-    'block/definitions:addinstance' => array(
+    'block/definitions:addinstance' => [
         'captype' => 'read',
         'contextlevel' => CONTEXT_BLOCK,
-        'archetypes' => array(
+        'archetypes' => [
             'manager' => CAP_ALLOW,
             'editingteacher' => CAP_ALLOW
-        ),
+        ],
 
         'clonepermissionsfrom' => 'moodle/site:manageblocks'
-    )
-);
+    ],
+];

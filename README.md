@@ -17,6 +17,9 @@ to make sure it will meet your needs.
 
 **Change Log**
 
+*current version*
+- Some formatting tweaks to make Moodle happy.
+
 2024121100
 - Fix an error when near antonyms aren't included.
 

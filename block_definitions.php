@@ -14,7 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-
 /**
  * Contains the class for the definitions block.
  *
@@ -23,6 +22,7 @@
  * @copyright 2021 Pembina Hills School Division. All rights reserved.
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
 defined('MOODLE_INTERNAL') || die();
 require_once('locallib.php');
 
@@ -82,11 +82,11 @@ class block_definitions extends block_base {
      * @return array
      */
     public function applicable_formats() {
-        return array(
+        return [
             'site' => false,
             'course-view' => true,
-            'mod' => true
-        );
+            'mod' => true,
+        ];
     }
 
 }

@@ -1,5 +1,4 @@
 <?php
-
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -15,7 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-
 /**
  * Local functions used in the definitions Block.
  *
@@ -24,7 +22,6 @@
  * @copyright 2021 Pembina Hills School Division. All rights reserved.
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-defined('MOODLE_INTERNAL') || die;
 
 /**
  * Retrieve a definition from the internet.
@@ -61,17 +58,17 @@ function block_definitions_retrieve_definition($word, $dictionary, $format = 'no
 
     $definitions = json_decode(file_get_contents($uri));
 
-    $ret = array();
+    $ret = [];
     $matchfound = false;
     $nomatch = true;
     $closematch = false;
     $hideoffensive = get_config('block_definitions', 'hideoffensive');
 
     // For use when returnin in tabbed format.
-    $tabs = array();
+    $tabs = [];
     // For use when returnin in tabbed format.
-    $panels = array();
-    $closematches = array();
+    $panels = [];
+    $closematches = [];
     $x = 0;
 
     // Little bit of cleanup.
@@ -83,7 +80,7 @@ function block_definitions_retrieve_definition($word, $dictionary, $format = 'no
         // It's an array of close matches.
         $closematch = true;
         $nomatch = false;
-        $closematches = array();
+        $closematches = [];
         foreach ($definitions as $definition) {
             $d = new stdClass();
             $d->word = $definition;
@@ -141,7 +138,7 @@ function block_definitions_retrieve_definition($word, $dictionary, $format = 'no
                         $panel->ins = '<i>' . $vrs->vl . '</i> ' . str_replace('*', '', $vrs->va);
                     }
                 }
-                $cxs = array();
+                $cxs = [];
                 if (property_exists($definition, 'cxs')) {
                     foreach ($definition->cxs as $c) {
                         $cx = new stdClass();
@@ -162,7 +159,7 @@ function block_definitions_retrieve_definition($word, $dictionary, $format = 'no
                     $panel->hascxs = false;
                 }
                 $panel->cxs = $cxs;
-                $def = array();
+                $def = [];
                 if ($dictionary === 'thesaurus') {
                     $i = 1;
                     foreach ($definition->def as $d) {
@@ -177,9 +174,9 @@ function block_definitions_retrieve_definition($word, $dictionary, $format = 'no
                             }
 
                             if (property_exists($sense, 'syn_list')) {
-                                $synlist = array();
+                                $synlist = [];
                                 foreach ($sense->syn_list as $s) {
-                                    $sr = array();
+                                    $sr = [];
                                     foreach ($s as $syn) {
                                         $sr[] = $syn->wd;
                                     }
@@ -190,9 +187,9 @@ function block_definitions_retrieve_definition($word, $dictionary, $format = 'no
                             }
 
                             if (property_exists($sense, 'rel_list')) {
-                                $rellist = array();
+                                $rellist = [];
                                 foreach ($sense->rel_list as $s) {
-                                    $sr = array();
+                                    $sr = [];
                                     foreach ($s as $syn) {
                                         $sr[] = $syn->wd;
                                     }
@@ -206,10 +203,10 @@ function block_definitions_retrieve_definition($word, $dictionary, $format = 'no
                             }
 
                             if (property_exists($sense, 'near_list')) {
-                                $nearlist = array();
+                                $nearlist = [];
                                 if (isset($sense->nearlist)) {
                                     foreach ($sense->nearlist as $s) {
-                                        $sr = array();
+                                        $sr = [];
                                         foreach ($s as $syn) {
                                             $sr[] = $syn->wd;
                                         }
@@ -224,9 +221,9 @@ function block_definitions_retrieve_definition($word, $dictionary, $format = 'no
                             }
 
                             if (property_exists($sense, 'ant_list')) {
-                                $antlist = array();
+                                $antlist = [];
                                 foreach ($sense->ant_list as $s) {
-                                    $sr = array();
+                                    $sr = [];
                                     foreach ($s as $syn) {
                                         $sr[] = $syn->wd;
                                     }
@@ -277,7 +274,7 @@ function block_definitions_retrieve_definition($word, $dictionary, $format = 'no
         if ($closematch) {
             $ret->closematches = $closematches;
         } else {
-            $ret->closematches = array();
+            $ret->closematches = [];
         }
     }
 

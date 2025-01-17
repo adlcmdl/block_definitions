@@ -14,7 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-
 /**
  * External API
  *
@@ -23,7 +22,6 @@
  * @copyright 2021 Pembina Hills School Division. All rights reserved.
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-defined('MOODLE_INTERNAL') || die();
 
 require_once("$CFG->libdir/externallib.php");
 require_once("$CFG->dirroot/blocks/definitions/locallib.php");
@@ -43,10 +41,10 @@ class block_definitions_external extends external_api {
      */
     public static function get_definition_parameters() {
         return new external_function_parameters(
-                array(
+                [
                     'word' => new external_value(PARAM_TEXT, 'the word to define'),
-                    'dictionary' => new external_value(PARAM_TEXT, '')
-                )
+                    'dictionary' => new external_value(PARAM_TEXT, ''),
+                ]
         );
     }
 
@@ -60,10 +58,10 @@ class block_definitions_external extends external_api {
     public static function get_definition($word, $dictionary) {
         $params = self::validate_parameters(
                         self::get_definition_parameters(),
-                        array(
+                        [
                             'word' => $word,
-                            'dictionary' => $dictionary
-                        )
+                            'dictionary' => $dictionary,
+                        ]
         );
 
         $ret = block_definitions_retrieve_definition($word, $dictionary, 'tabs');
@@ -78,7 +76,7 @@ class block_definitions_external extends external_api {
      */
     public static function get_definition_returns() {
         return new external_single_structure(
-            array(
+            [
                 'template' => new external_value(PARAM_TEXT, 'The name of the template to render'),
                 'containerid' => new external_value(PARAM_TEXT, 'A unique ID for the tab container', VALUE_OPTIONAL),
                 'title' => new external_value(PARAM_TEXT, 'The title of the modal'),
@@ -89,17 +87,17 @@ class block_definitions_external extends external_api {
                 'showtabs' => new external_value(PARAM_BOOL, 'Should the tabs be displayed', VALUE_OPTIONAL),
                 'tabs' => new external_multiple_structure(
                     new external_single_structure(
-                        array(
+                        [
                             'selected' => new external_value(PARAM_BOOL, 'Is this tab selected?'),
                             'id' => new external_value(PARAM_TEXT, 'A unique ID for this tab'),
                             'target' => new external_value(PARAM_TEXT, 'The target panel for this tab'),
-                            'title' => new external_value(PARAM_TEXT, 'The title of this tab')
-                        )
+                            'title' => new external_value(PARAM_TEXT, 'The title of this tab'),
+                        ]
                     )
                 , 'The tabs for each definition', VALUE_OPTIONAL),
                 'panels' => new external_multiple_structure(
                     new external_single_structure(
-                        array(
+                        [
                             'id' => new external_value(PARAM_TEXT, 'A unique ID for this panel'),
                             'word' => new external_value(PARAM_TEXT, 'The word'),
                             'selected' => new external_value(PARAM_BOOL, 'Is this panel selected?'),
@@ -108,7 +106,7 @@ class block_definitions_external extends external_api {
                             'fl' => new external_value(PARAM_TEXT, 'Functional label'),
                             'def' => new external_multiple_structure(
                                     new external_single_structure(
-                                            array(
+                                            [
                                                 'num' => new external_value(PARAM_INT, 'The definition numnber'),
                                                 'text' => new external_value(PARAM_TEXT, 'The definition text'),
                                                 'syn_heading' => new external_value(PARAM_RAW,
@@ -126,31 +124,31 @@ class block_definitions_external extends external_api {
                                                 'ant_heading' => new external_value(PARAM_RAW,
                                                         'The heading for the antonym words list', VALUE_OPTIONAL),
                                                 'ant_list' => new external_value(PARAM_RAW,
-                                                        'A comma-separated list of antonym words', VALUE_OPTIONAL)
-                                                )
+                                                        'A comma-separated list of antonym words', VALUE_OPTIONAL),
+                                            ]
                                         )
                                 ),
                             'hascxs' => new external_value(PARAM_BOOL, 'Does this panel have a cross-reference?'),
                             'cxs' => new external_multiple_structure(
                                     new external_single_structure(
-                                            array(
-                                                'html' => new external_value(PARAM_RAW, 'Cross-reference HTML')
-                                            )
+                                            [
+                                                'html' => new external_value(PARAM_RAW, 'Cross-reference HTML'),
+                                            ]
                                     )
-                            )
-                        )
+                            ),
+                        ]
                     ), 'The panels for each definition', VALUE_OPTIONAL
                 ),
                 'closematches' => new external_multiple_structure(
                         new external_single_structure(
-                            array(
-                                'word' => new external_value(PARAM_TEXT, 'The word')
-                            )
+                            [
+                                'word' => new external_value(PARAM_TEXT, 'The word'),
+                            ]
                         ), 'A list of close matches', VALUE_OPTIONAL
                 ),
                 'modalmessage' => new external_value(PARAM_RAW,
                         'The message to display in a modal if there is an error', VALUE_OPTIONAL),
-            )
+            ]
         );
     }
 

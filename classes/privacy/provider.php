@@ -14,7 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-
 /**
  * Privacy subsystem implementation for the definitions plugin.
  *
@@ -25,8 +24,6 @@
  */
 
 namespace block_definitions\privacy;
-
-defined('MOODLE_INTERNAL') || die();
 
 /**
  * Privacy Subsystem for block_definitions implementing null_provider.
@@ -42,7 +39,7 @@ class provider implements \core_privacy\local\metadata\null_provider {
      *
      * @return  string
      */
-    public static function get_reason() : string {
+    public static function get_reason(): string {
         return 'privacy:metadata';
     }
 }
