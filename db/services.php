@@ -32,7 +32,7 @@ $functions = [
         'classpath' => 'blocks/definitions/externallib.php',
         'description' => 'Get a definition',
         'ajax' => true,
-        'type' => 'read'
+        'type' => 'read',
     ],
 ];
 
